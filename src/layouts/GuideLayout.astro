@@ -1,0 +1,382 @@
+---
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? '';
+const lang = frontmatter?.lang ?? 'en';
+const path = Astro.url.pathname;
+
+const navLinks = lang === 'bm'
+  ? [
+      { href: '/bm',       label: 'Tajweed' },
+      { href: '/bm/waqaf', label: 'Waqaf' },
+    ]
+  : [
+      { href: '/en',       label: 'Tajweed' },
+      { href: '/en/waqaf', label: 'Waqaf' },
+    ];
+---
+
+<!doctype html>
+<html lang={lang === 'bm' ? 'ms' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A guide to Tajweed — the rules of Quran recitation." />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="min-h-screen" style="font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 40%, #f0fdfa 100%);">
+
+    <!-- Background blobs -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div style="position:absolute;top:-80px;left:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(110,231,183,0.3) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;top:40%;right:-100px;width:360px;height:360px;background:radial-gradient(circle,rgba(167,243,208,0.2) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:0;left:35%;width:300px;height:300px;background:radial-gradient(circle,rgba(187,247,208,0.25) 0%,transparent 70%);border-radius:50%;"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-30 border-b border-white/40 shadow-sm" style="background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
+      <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-6">
+          <a href="/" class="flex items-center gap-2 text-emerald-700 font-semibold hover:text-emerald-800 transition-colors">
+            <span class="text-lg">📖</span>
+            <span class="text-sm tracking-widest uppercase">Tajweed</span>
+          </a>
+          <nav class="flex items-center gap-1">
+            {navLinks.map(({ href, label }) => (
+              <a
+                href={href}
+                class={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${path === href || path === href + '/' ? 'text-emerald-700 bg-emerald-50' : 'text-stone-500 hover:text-stone-800 hover:bg-stone-100'}`}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div class="flex gap-1 p-1 rounded-full border border-white/50" style="background:rgba(255,255,255,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+          <a href="/en" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'en' ? 'bg-white text-emerald-700 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}>English</a>
+          <a href="/bm" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'bm' ? 'bg-white text-emerald-700 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}>Melayu</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile jump bar -->
+    <div id="mobile-jump-bar" class="lg:hidden sticky top-14 z-20 border-b border-white/40 px-4 py-2 overflow-x-auto flex gap-2 scrollbar-hide" style="display:none!important;background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);"></div>
+
+    <!-- Page layout -->
+    <div class="max-w-6xl mx-auto px-4 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
+
+      <!-- Sidebar: sticky + full viewport height below navbar = never moves -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-8 pr-4 scrollbar-hide border-r border-stone-200">
+          <p class="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-4">
+            {lang === 'bm' ? 'Kandungan' : 'On this page'}
+          </p>
+          <nav id="toc" class="flex flex-col gap-0.5 text-sm"></nav>
+        </div>
+      </aside>
+
+      <!-- Article -->
+      <main class="py-10 min-w-0">
+        <article id="article" class="prose prose-stone max-w-none
+          prose-headings:font-semibold prose-headings:text-stone-900
+          prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-1
+          prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-stone-700
+          prose-h3:text-[15px] prose-h3:mb-3 prose-h3:text-stone-800
+          prose-p:text-stone-600 prose-p:leading-relaxed prose-p:text-[15px]
+          prose-li:text-stone-600 prose-li:text-[15px]
+          prose-strong:text-stone-800
+          prose-table:text-sm prose-table:border-collapse
+          prose-th:text-left prose-th:font-semibold prose-th:text-emerald-800 prose-th:bg-emerald-50 prose-th:px-4 prose-th:py-2
+          prose-td:px-4 prose-td:py-2 prose-td:text-stone-600 prose-td:border-b prose-td:border-stone-100
+          prose-blockquote:not-italic prose-blockquote:border-l-4 prose-blockquote:border-emerald-400 prose-blockquote:bg-emerald-50 prose-blockquote:text-stone-700 prose-blockquote:rounded-r-xl prose-blockquote:py-3 prose-blockquote:px-4
+          prose-code:text-emerald-700 prose-code:bg-emerald-50 prose-code:px-1 prose-code:rounded
+          prose-hr:border-stone-200">
+          <slot />
+        </article>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-stone-100 py-8 text-center text-xs text-stone-400">
+      Built with Astro &amp; Tailwind CSS
+    </footer>
+
+    <style>
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* Rule cards injected by JS */
+      .rule-card {
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+        border-left-width: 4px;
+      }
+      .rule-card:hover {
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+        transition: all 0.2s ease;
+      }
+      .rule-card h3 {
+        margin-top: 0 !important;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .rule-card table {
+        margin-top: 0.75rem;
+      }
+      .rule-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+        color: white;
+      }
+
+      /* Arabic text */
+      .arabic-text {
+        font-family: 'Amiri', serif;
+        font-size: 1.4em;
+        direction: rtl;
+        letter-spacing: 0.05em;
+        color: #1c1917;
+      }
+
+      /* TOC active state */
+      .toc-link.active {
+        color: #065f46;
+        background: rgba(209, 250, 229, 0.7);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        font-weight: 600;
+      }
+      .toc-link.active .toc-badge {
+        background-color: #065f46 !important;
+        color: white !important;
+      }
+
+      /* Mobile chip active state */
+      .mobile-chip.chip-active {
+        font-weight: 700;
+        box-shadow: 0 0 0 2px currentColor;
+      }
+
+      /* Offset anchor targets below fixed navbar */
+      #article h1, #article h2, #article h3 {
+        scroll-margin-top: 72px;
+      }
+      @media (max-width: 1024px) {
+        #article h1, #article h2, #article h3 {
+          scroll-margin-top: 116px;
+        }
+      }
+    </style>
+
+    <script>
+      const RULE_COLORS = [
+        { border: '#10b981', badge: '#10b981' },
+        { border: '#3b82f6', badge: '#3b82f6' },
+        { border: '#8b5cf6', badge: '#8b5cf6' },
+        { border: '#f59e0b', badge: '#f59e0b' },
+        { border: '#ef4444', badge: '#ef4444' },
+        { border: '#06b6d4', badge: '#06b6d4' },
+        { border: '#ec4899', badge: '#ec4899' },
+        { border: '#84cc16', badge: '#84cc16' },
+        { border: '#f97316', badge: '#f97316' },
+      ];
+
+      function wrapRuleCards() {
+        const article = document.getElementById('article');
+        if (!article) return;
+
+        const h3s = Array.from(article.querySelectorAll('h3'));
+        h3s.forEach((h3, index) => {
+          const color = RULE_COLORS[index % RULE_COLORS.length];
+
+          const siblings = [];
+          let next = h3.nextElementSibling;
+          while (next && next.tagName !== 'H3' && next.tagName !== 'H2') {
+            const after = next.nextElementSibling;
+            if (next.tagName === 'HR') { next.remove(); break; }
+            siblings.push(next);
+            next = after;
+          }
+
+          const card = document.createElement('section');
+          card.className = 'rule-card';
+          card.style.borderLeftColor = color.border;
+          card.dataset.rule = String(index + 1);
+
+          h3.parentNode.insertBefore(card, h3);
+          card.appendChild(h3);
+          siblings.forEach(el => card.appendChild(el));
+
+          const num = h3.textContent.match(/^(\d+)\./)?.[1];
+          if (num) {
+            h3.innerHTML = h3.innerHTML.replace(/^\d+\.\s*/, '');
+            const badge = document.createElement('span');
+            badge.className = 'rule-badge';
+            badge.style.backgroundColor = color.badge;
+            badge.textContent = num;
+            h3.prepend(badge);
+          }
+
+          card.querySelectorAll('blockquote p').forEach(p => {
+            if (/[\u0600-\u06FF]/.test(p.textContent)) p.classList.add('arabic-text');
+          });
+        });
+
+        article.querySelectorAll('blockquote p').forEach(p => {
+          if (/[\u0600-\u06FF]/.test(p.textContent)) p.classList.add('arabic-text');
+        });
+      }
+
+      function buildTOC() {
+        const article = document.getElementById('article');
+        const toc = document.getElementById('toc');
+        const mobileBar = document.getElementById('mobile-jump-bar');
+        if (!article || !toc) return;
+
+        const headings = Array.from(article.querySelectorAll('h2, h3'));
+        const ruleHeadings = [];
+
+        headings.forEach((h, i) => {
+          const rawText = h.textContent
+            .replace(/^\d+\.\s*/, '')
+            .split('(')[0]
+            .split('—')[0]
+            .split('–')[0]
+            .trim();
+          const slug = rawText
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .substring(0, 50);
+          h.id = slug || `heading-${i}`;
+
+          const isH3 = h.tagName === 'H3';
+          const link = document.createElement('a');
+          link.href = `#${h.id}`;
+          link.dataset.headingId = h.id;
+
+          const cleanLabel = h.textContent
+            .replace(/^\d+\.\s*/, '')
+            .split('(')[0]
+            .split('—')[0]
+            .split('–')[0]
+            .trim();
+
+          if (isH3) {
+            const num = h.textContent.match(/\d+/)?.[0];
+            const color = num ? RULE_COLORS[(parseInt(num) - 1) % RULE_COLORS.length] : RULE_COLORS[0];
+            link.className = 'toc-link flex items-center gap-2 px-2 py-1.5 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-colors';
+            link.innerHTML = `
+              <span class="toc-badge flex-shrink-0 w-5 h-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center" style="background-color:${color.badge}">${num || '·'}</span>
+              <span class="truncate text-[13px]">${cleanLabel}</span>
+            `;
+            ruleHeadings.push({ id: h.id, label: cleanLabel, num, color });
+          } else {
+            link.className = 'toc-link flex items-center px-2 py-1.5 rounded-lg text-[11px] font-semibold uppercase tracking-wider text-stone-400 hover:text-stone-600 transition-colors mt-3 first:mt-0';
+            link.textContent = cleanLabel;
+          }
+
+          toc.appendChild(link);
+        });
+
+        if (mobileBar && ruleHeadings.length > 0) {
+          mobileBar.style.removeProperty('display');
+          mobileBar.style.display = 'flex';
+
+          ruleHeadings.forEach(({ id, label, num, color }) => {
+            const chip = document.createElement('a');
+            chip.href = `#${id}`;
+            chip.className = 'mobile-chip flex-shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors whitespace-nowrap';
+            chip.style.borderColor = color.badge + '40';
+            chip.style.color = color.badge;
+            chip.style.backgroundColor = color.badge + '10';
+            chip.innerHTML = label;
+            mobileBar.appendChild(chip);
+          });
+        }
+      }
+
+      function getStickyOffset() {
+        const navbar = document.querySelector('nav');
+        const mobileBar = document.getElementById('mobile-jump-bar');
+        let offset = navbar ? navbar.offsetHeight : 56;
+        if (mobileBar && mobileBar.offsetHeight > 0) offset += mobileBar.offsetHeight;
+        return offset + 16;
+      }
+
+      function setupScrollspy() {
+        const headings = Array.from(document.querySelectorAll('#article h2, #article h3'));
+
+        function getActiveId() {
+          const threshold = window.scrollY + getStickyOffset() + 10;
+          let activeId = null;
+          for (const h of headings) {
+            if (h.getBoundingClientRect().top + window.scrollY <= threshold) {
+              activeId = h.id;
+            } else {
+              break;
+            }
+          }
+          return activeId;
+        }
+
+        function updateActive() {
+          const activeId = getActiveId();
+          document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.toggle('active', link.dataset.headingId === activeId);
+          });
+          document.querySelectorAll('.mobile-chip').forEach(chip => {
+            const chipId = chip.getAttribute('href')?.replace('#', '');
+            chip.classList.toggle('chip-active', chipId === activeId);
+          });
+        }
+
+        window.addEventListener('scroll', updateActive, { passive: true });
+        updateActive();
+      }
+
+      function setupSmoothScroll() {
+        document.addEventListener('click', e => {
+          const link = e.target.closest('a[href^="#"]');
+          if (!link) return;
+          e.preventDefault();
+          const id = link.getAttribute('href').replace(/^#/, '');
+          const target = document.getElementById(id);
+          if (target) {
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - getStickyOffset(), behavior: 'smooth' });
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        buildTOC();
+        wrapRuleCards();
+        setupScrollspy();
+        setupSmoothScroll();
+      });
+    </script>
+
+  </body>
+</html>
