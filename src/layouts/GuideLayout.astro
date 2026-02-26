@@ -29,51 +29,47 @@ const navLinks = lang === 'bm'
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
   </head>
 
-  <body class="min-h-screen" style="font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 40%, #f0fdfa 100%);">
+  <body class="min-h-screen" style="font-family: 'Inter', sans-serif; background: #09090b;">
 
     <!-- Background blobs -->
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div style="position:absolute;top:-80px;left:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(110,231,183,0.3) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:absolute;top:40%;right:-100px;width:360px;height:360px;background:radial-gradient(circle,rgba(167,243,208,0.2) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:absolute;bottom:0;left:35%;width:300px;height:300px;background:radial-gradient(circle,rgba(187,247,208,0.25) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;top:-80px;left:-80px;width:440px;height:440px;background:radial-gradient(circle,rgba(124,58,237,0.18) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;top:40%;right:-100px;width:380px;height:380px;background:radial-gradient(circle,rgba(217,119,6,0.12) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:0;left:35%;width:320px;height:320px;background:radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 70%);border-radius:50%;"></div>
     </div>
 
     <!-- Navbar -->
-    <nav class="sticky top-0 z-30 border-b border-white/40 shadow-sm" style="background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
+    <nav class="sticky top-0 z-30 border-b" style="background:rgba(9,9,11,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:rgba(39,39,42,0.8);">
       <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <div class="flex items-center gap-6">
-          <a href="/" class="flex items-center gap-2 text-emerald-700 font-semibold hover:text-emerald-800 transition-colors">
-            <span class="text-lg">📖</span>
-            <span class="text-sm tracking-widest uppercase">Tajweed</span>
-          </a>
           <nav class="flex items-center gap-1">
             {navLinks.map(({ href, label }) => (
               <a
                 href={href}
-                class={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${path === href || path === href + '/' ? 'text-emerald-700 bg-emerald-50' : 'text-stone-500 hover:text-stone-800 hover:bg-stone-100'}`}
+                class={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${path === href || path === href + '/' ? 'text-white bg-violet-950/60' : 'text-white hover:text-white hover:bg-zinc-800'}`}
               >
                 {label}
               </a>
             ))}
           </nav>
         </div>
-        <div class="flex gap-1 p-1 rounded-full border border-white/50" style="background:rgba(255,255,255,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
-          <a href="/en" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'en' ? 'bg-white text-emerald-700 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}>English</a>
-          <a href="/bm" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'bm' ? 'bg-white text-emerald-700 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}>Melayu</a>
+        <div class="flex gap-1 p-1 rounded-full border" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-color:rgba(63,63,70,0.6);">
+          <a href="/en" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'en' ? 'bg-zinc-800 text-white shadow-sm' : 'text-white hover:text-white'}`}>English</a>
+          <a href="/bm" class={`px-4 py-1 rounded-full text-sm font-medium transition-all ${lang === 'bm' ? 'bg-zinc-800 text-white shadow-sm' : 'text-white hover:text-white'}`}>Melayu</a>
         </div>
       </div>
     </nav>
 
     <!-- Mobile jump bar -->
-    <div id="mobile-jump-bar" class="lg:hidden sticky top-14 z-20 border-b border-white/40 px-4 py-2 overflow-x-auto flex gap-2 scrollbar-hide" style="display:none!important;background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);"></div>
+    <div id="mobile-jump-bar" class="sticky top-14 z-20 border-b py-2 overflow-x-auto flex gap-2 scrollbar-hide px-4 lg:pl-[calc(260px+2.5rem+1rem)] lg:pr-4" style="display:none!important;background:rgba(9,9,11,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:rgba(39,39,42,0.8);"></div>
 
     <!-- Page layout -->
     <div class="max-w-6xl mx-auto px-4 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
 
       <!-- Sidebar: sticky + full viewport height below navbar = never moves -->
       <aside class="hidden lg:block">
-        <div class="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-8 pr-4 scrollbar-hide border-r border-stone-200">
-          <p class="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-4">
+        <div class="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-8 pr-4 scrollbar-hide border-r border-zinc-800">
+          <p class="text-[11px] font-bold text-white uppercase tracking-widest mb-4">
             {lang === 'bm' ? 'Kandungan' : 'On this page'}
           </p>
           <nav id="toc" class="flex flex-col gap-0.5 text-sm"></nav>
@@ -82,27 +78,27 @@ const navLinks = lang === 'bm'
 
       <!-- Article -->
       <main class="py-10 min-w-0">
-        <article id="article" class="prose prose-stone max-w-none
-          prose-headings:font-semibold prose-headings:text-stone-900
+        <article id="article" class="prose prose-invert max-w-none
+          prose-headings:font-semibold
           prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-1
-          prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-stone-700
-          prose-h3:text-[15px] prose-h3:mb-3 prose-h3:text-stone-800
-          prose-p:text-stone-600 prose-p:leading-relaxed prose-p:text-[15px]
-          prose-li:text-stone-600 prose-li:text-[15px]
-          prose-strong:text-stone-800
+          prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-white
+          prose-h3:text-[15px] prose-h3:mb-3 prose-h3:text-white
+          prose-p:text-white prose-p:leading-relaxed prose-p:text-[15px]
+          prose-li:text-white prose-li:text-[15px]
+          prose-strong:text-white
           prose-table:text-sm prose-table:border-collapse
-          prose-th:text-left prose-th:font-semibold prose-th:text-emerald-800 prose-th:bg-emerald-50 prose-th:px-4 prose-th:py-2
-          prose-td:px-4 prose-td:py-2 prose-td:text-stone-600 prose-td:border-b prose-td:border-stone-100
-          prose-blockquote:not-italic prose-blockquote:border-l-4 prose-blockquote:border-emerald-400 prose-blockquote:bg-emerald-50 prose-blockquote:text-stone-700 prose-blockquote:rounded-r-xl prose-blockquote:py-3 prose-blockquote:px-4
-          prose-code:text-emerald-700 prose-code:bg-emerald-50 prose-code:px-1 prose-code:rounded
-          prose-hr:border-stone-200">
+          prose-th:text-left prose-th:font-semibold prose-th:text-white prose-th:bg-violet-950 prose-th:px-4 prose-th:py-2
+          prose-td:px-4 prose-td:py-2 prose-td:text-white prose-td:border-b prose-td:border-zinc-800
+          prose-blockquote:not-italic prose-blockquote:border-l-4 prose-blockquote:border-violet-500 prose-blockquote:bg-violet-950/30 prose-blockquote:text-white prose-blockquote:rounded-r-xl prose-blockquote:py-3 prose-blockquote:px-4
+          prose-code:text-white prose-code:bg-violet-950 prose-code:px-1 prose-code:rounded
+          prose-hr:border-zinc-800">
           <slot />
         </article>
       </main>
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-stone-100 py-8 text-center text-xs text-stone-400">
+    <footer class="border-t border-zinc-800 py-8 text-center text-xs text-white">
       Built with Astro &amp; Tailwind CSS
     </footer>
 
@@ -112,41 +108,60 @@ const navLinks = lang === 'bm'
 
       /* Rule cards injected by JS */
       .rule-card {
-        background: rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.04);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         padding: 1.5rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.4);
         border-left-width: 4px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+      .rule-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent, rgba(124,58,237,0.07));
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
       }
       .rule-card:hover {
-        background: rgba(255, 255, 255, 0.8);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
-        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+        transform: translateY(-2px);
+      }
+      .rule-card:hover::before {
+        opacity: 1;
       }
       .rule-card h3 {
         margin-top: 0 !important;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        color: #ffffff !important;
       }
       .rule-card table {
         margin-top: 0.75rem;
       }
       .rule-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        font-size: 11px;
-        font-weight: 700;
-        flex-shrink: 0;
-        color: white;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 26px !important;
+        height: 26px !important;
+        min-width: 26px !important;
+        border-radius: 50% !important;
+        font-size: 11px !important;
+        line-height: 1 !important;
+        font-weight: 700 !important;
+        flex-shrink: 0 !important;
+        color: white !important;
+        vertical-align: middle !important;
       }
 
       /* Arabic text */
@@ -155,20 +170,14 @@ const navLinks = lang === 'bm'
         font-size: 1.4em;
         direction: rtl;
         letter-spacing: 0.05em;
-        color: #1c1917;
+        color: #ffffff;
       }
 
       /* TOC active state */
       .toc-link.active {
-        color: #065f46;
-        background: rgba(209, 250, 229, 0.7);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        color: #ffffff;
+        background: rgba(124, 58, 237, 0.15);
         font-weight: 600;
-      }
-      .toc-link.active .toc-badge {
-        background-color: #065f46 !important;
-        color: white !important;
       }
 
       /* Mobile chip active state */
@@ -190,15 +199,15 @@ const navLinks = lang === 'bm'
 
     <script>
       const RULE_COLORS = [
-        { border: '#10b981', badge: '#10b981' },
-        { border: '#3b82f6', badge: '#3b82f6' },
-        { border: '#8b5cf6', badge: '#8b5cf6' },
-        { border: '#f59e0b', badge: '#f59e0b' },
-        { border: '#ef4444', badge: '#ef4444' },
-        { border: '#06b6d4', badge: '#06b6d4' },
-        { border: '#ec4899', badge: '#ec4899' },
-        { border: '#84cc16', badge: '#84cc16' },
-        { border: '#f97316', badge: '#f97316' },
+        { border: '#10b981', badge: '#6ee7b7' },
+        { border: '#3b82f6', badge: '#93c5fd' },
+        { border: '#8b5cf6', badge: '#c4b5fd' },
+        { border: '#f59e0b', badge: '#fcd34d' },
+        { border: '#ef4444', badge: '#fca5a5' },
+        { border: '#06b6d4', badge: '#67e8f9' },
+        { border: '#ec4899', badge: '#f9a8d4' },
+        { border: '#84cc16', badge: '#bef264' },
+        { border: '#f97316', badge: '#fdba74' },
       ];
 
       function wrapRuleCards() {
@@ -231,9 +240,23 @@ const navLinks = lang === 'bm'
           if (num) {
             h3.innerHTML = h3.innerHTML.replace(/^\d+\.\s*/, '');
             const badge = document.createElement('span');
-            badge.className = 'rule-badge';
-            badge.style.backgroundColor = color.badge;
             badge.textContent = num;
+            badge.style.cssText = `
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 26px;
+              height: 26px;
+              min-width: 26px;
+              border-radius: 50%;
+              font-size: 11px;
+              line-height: 1;
+              font-weight: 700;
+              flex-shrink: 0;
+              color: ${color.badge};
+              background-color: ${color.badge}22;
+              border: 1px solid ${color.badge}55;
+            `;
             h3.prepend(badge);
           }
 
@@ -287,14 +310,14 @@ const navLinks = lang === 'bm'
           if (isH3) {
             const num = h.textContent.match(/\d+/)?.[0];
             const color = num ? RULE_COLORS[(parseInt(num) - 1) % RULE_COLORS.length] : RULE_COLORS[0];
-            link.className = 'toc-link flex items-center gap-2 px-2 py-1.5 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-colors';
+            link.className = 'toc-link flex items-center gap-2 px-2 py-1.5 rounded-lg text-white hover:text-white hover:bg-zinc-800 transition-colors';
             link.innerHTML = `
-              <span class="toc-badge flex-shrink-0 w-5 h-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center" style="background-color:${color.badge}">${num || '·'}</span>
+              <span class="toc-badge flex-shrink-0 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center" style="color:${color.badge};background-color:${color.badge}22;border:1px solid ${color.badge}55;">${num || '·'}</span>
               <span class="truncate text-[13px]">${cleanLabel}</span>
             `;
             ruleHeadings.push({ id: h.id, label: cleanLabel, num, color });
           } else {
-            link.className = 'toc-link flex items-center px-2 py-1.5 rounded-lg text-[11px] font-semibold uppercase tracking-wider text-stone-400 hover:text-stone-600 transition-colors mt-3 first:mt-0';
+            link.className = 'toc-link flex items-center px-2 py-1.5 rounded-lg text-[11px] font-semibold uppercase tracking-wider text-white hover:text-white transition-colors mt-3 first:mt-0';
             link.textContent = cleanLabel;
           }
 
@@ -310,7 +333,7 @@ const navLinks = lang === 'bm'
             chip.href = `#${id}`;
             chip.className = 'mobile-chip flex-shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors whitespace-nowrap';
             chip.style.borderColor = color.badge + '40';
-            chip.style.color = color.badge;
+            chip.style.color = '#ffffff';
             chip.style.backgroundColor = color.badge + '10';
             chip.innerHTML = label;
             mobileBar.appendChild(chip);
